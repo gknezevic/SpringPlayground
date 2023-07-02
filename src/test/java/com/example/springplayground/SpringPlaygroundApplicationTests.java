@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static com.example.springplayground.model.Genre.HORROR;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -38,6 +41,16 @@ class SpringPlaygroundApplicationTests {
     @Test
     void shouldThrowExceptionIfBookIsNotFoundTest() {
         assertThrows(EntityNotFoundException.class, () -> booksPort.get("XYZ"));
+    }
+
+    @Test
+    void shouldFetchAllHorrorBooksTest() {
+        booksPort.save(Book.create("My Test book 1", HORROR));
+        booksPort.save(Book.create("My Test book 2", Genre.COMEDY));
+        booksPort.save(Book.create("My Test book 3", HORROR));
+
+        List<Book> horrorBooks = booksPort.getByGenre(HORROR);
+        assertEquals(2, horrorBooks.size());
     }
 
 }

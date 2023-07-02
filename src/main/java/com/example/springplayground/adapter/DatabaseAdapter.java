@@ -8,6 +8,8 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
+import static com.example.springplayground.repository.specification.BooksSpecification.findByGenre;
+
 public class DatabaseAdapter implements BooksPort {
 
     private final BookRepository bookRepository;
@@ -30,6 +32,6 @@ public class DatabaseAdapter implements BooksPort {
 
     @Override
     public List<Book> getByGenre(Genre genre) {
-        return null;
+        return this.bookRepository.findAll(findByGenre(genre));
     }
 }
