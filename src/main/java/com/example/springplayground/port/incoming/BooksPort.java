@@ -10,4 +10,8 @@ public interface BooksPort {
     Book save(Book book);
     Book get(String id);
     List<Book> getByGenre(Genre genre);
+
+    List<Book> getByAuthor(String author);
+
+    List<Book> getBy(Genre genre, String author);
 }

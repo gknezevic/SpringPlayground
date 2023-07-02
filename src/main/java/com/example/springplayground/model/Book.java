@@ -22,12 +22,16 @@ public class Book implements Serializable {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    private Book(String title, Genre genre) {
+    @Column
+    private String author;
+
+    private Book(String title, Genre genre, String author) {
         this.title = title;
         this.genre = genre;
+        this.author = author;
     }
 
-    public static Book create(String title, Genre genre) {
-        return new Book(title, genre);
+    public static Book create(String title, Genre genre, String author) {
+        return new Book(title, genre, author);
     }
 }
